@@ -5,7 +5,7 @@
 #ifndef GOBANG_CHESS_H
 #define GOBANG_CHESS_H
 
-#include <graphics.h>
+#include "graphics.h"
 #include <vector>
 
 using namespace std;
@@ -18,6 +18,7 @@ typedef enum{
 struct  ChessPos{
     int row;
     int col;
+    ChessPos(int r=0, int c=0) :row(r), col(c){}
 };
 
 class Chess {
@@ -46,12 +47,16 @@ public:
     //判断棋局是否结束
     bool checkOver();
 
+    bool checkWin();
+
 private:
     //棋盘尺寸
     int gradeSize;
     int margin_x; // 49
     int margin_y;//49
     float chessSize; // 棋子大小（棋盘方格大小）
+
+    ChessPos lastPos; //最近落子位置, Chess的private数据成员
 
     IMAGE chessBlackImg;
     IMAGE chessWhiteImg;
